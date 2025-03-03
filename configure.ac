@@ -20,50 +20,17 @@ AC_CONFIG_SRCDIR([htop.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
 
-AC_CANONICAL_HOST
 AM_INIT_AUTOMAKE([-Wall std-options subdir-objects])
 
 # ----------------------------------------------------------------------
 
 
 # ----------------------------------------------------------------------
-# Checks for platform.
+# This repo builds htop for monitoring XStore clusters.
 # ----------------------------------------------------------------------
-
-case "$host_os" in
-linux*|gnu*)
-   my_htop_platform=linux
-   AC_DEFINE([HTOP_LINUX], [], [Building for Linux.])
-   ;;
-freebsd*|kfreebsd*)
-   my_htop_platform=freebsd
-   AC_DEFINE([HTOP_FREEBSD], [], [Building for FreeBSD.])
-   ;;
-netbsd*)
-   my_htop_platform=netbsd
-   AC_DEFINE([HTOP_NETBSD], [], [Building for NetBSD.])
-   ;;
-openbsd*)
-   my_htop_platform=openbsd
-   AC_DEFINE([HTOP_OPENBSD], [], [Building for OpenBSD.])
-   ;;
-dragonfly*)
-   my_htop_platform=dragonflybsd
-   AC_DEFINE([HTOP_DRAGONFLYBSD], [], [Building for DragonFlyBSD.])
-   ;;
-darwin*)
-   my_htop_platform=darwin
-   AC_DEFINE([HTOP_DARWIN], [], [Building for Darwin.])
-   ;;
-solaris*)
-   my_htop_platform=solaris
-   AC_DEFINE([HTOP_SOLARIS], [], [Building for Solaris.])
-   ;;
-*)
-   my_htop_platform=unsupported
-   AC_DEFINE([HTOP_UNSUPPORTED], [], [Building for an unsupported platform.])
-   ;;
-esac
+#
+my_htop_platform=xstore
+AC_DEFINE([HTOP_XSTORE], [], [Building htop for monitoring XStore clusters.])
 
 # Enable extensions, required by hwloc scripts
 AC_USE_SYSTEM_EXTENSIONS
@@ -1118,6 +1085,7 @@ AM_CONDITIONAL([HTOP_DARWIN], [test "$my_htop_platform" = darwin])
 AM_CONDITIONAL([HTOP_SOLARIS], [test "$my_htop_platform" = solaris])
 AM_CONDITIONAL([HTOP_PCP], [test "$my_htop_platform" = pcp])
 AM_CONDITIONAL([HTOP_UNSUPPORTED], [test "$my_htop_platform" = unsupported])
+AM_CONDITIONAL([HTOP_XSTORE], [test "$my_htop_platform" = xstore])
 
 AC_SUBST(my_htop_platform)
 AC_CONFIG_FILES([Makefile htop.1])
