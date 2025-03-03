@@ -464,6 +464,29 @@ myhtopplatsources = $(pcp_platform_sources)
 pcp_htop_SOURCES  = $(myhtopplatprogram) $(myhtopheaders) $(myhtopplatheaders) $(myhtopsources) $(myhtopplatsources)
 endif
 
+# Xstore
+# ------
+
+xstore_platform_headers = \
+	generic/gettime.h \
+	xstore/Platform.h \
+	xstore/ProcessField.h \
+	xstore/XstoreMachine.h \
+	xstore/XstoreProcess.h \
+	xstore/XstoreProcessTable.h
+
+xstore_platform_sources = \
+	generic/gettime.c \
+	xstore/Platform.c \
+	xstore/XstoreMachine.c \
+	xstore/XstoreProcess.c \
+	xstore/XstoreProcessTable.c
+
+if HTOP_XSTORE
+myhtopplatsources = $(xstore_platform_sources)
+myhtopplatheaders = $(xstore_platform_headers)
+endif
+
 # Unsupported
 # -----------
 
